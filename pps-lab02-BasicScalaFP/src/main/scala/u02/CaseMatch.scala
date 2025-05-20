@@ -1,7 +1,6 @@
 package u02
 
 object CaseMatch extends App:
-
   // matching against patterns
   val v = 5
   val res = v match

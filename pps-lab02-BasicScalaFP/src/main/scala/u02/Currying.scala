@@ -1,6 +1,8 @@
 package u02
 
-object Currying extends App :
+object Currying extends App
+
+:
 
   // standard function with no currying
   def mult(x: Double, y: Double): Double = x * y
@@ -8,6 +10,10 @@ object Currying extends App :
   // function with currying
   // curriedMult has actually type: Double => (Double => Double)
   def curriedMult(x: Double)(y: Double): Double = x * y
+
+  def divide(x: Double, y: Double): Double = x / y
+
+  def divideCurried(x: Double)(y: Double): Double = x / y
 
   // slightly different syntax at the call side..
   println(mult(10, 2)) // 20

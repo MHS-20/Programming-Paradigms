@@ -23,10 +23,10 @@ object Tuples extends App :
 
   // note type inference: A=Int, B=Boolean
   println(checkFirstComponent(tu, 10)) // true
-  // the following: type mismatch.. not detected by IntelliJ editor
+  // the following: type mismatch... not detected by IntelliJ editor
   // println( checkFirstComponent(tu,"a") )
 
-  // Built-in tuples: Tuple2, Tuple3, .... Tuple22, aliased to (,) (,,) (,,,)
+  // Built-in tuples: Tuple2, Tuple3, ... Tuple22, aliased to (,) (,,) (,,,)
   val t = (10, true)
   val t2 = Tuple2(10, true)
 

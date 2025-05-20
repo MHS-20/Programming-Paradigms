@@ -1,6 +1,6 @@
 package u02
 
-object DefinedFunctions extends App :
+object DefinedFunctions extends App:
 
   // defined function
   def square(d: Double): Double = d * d
@@ -24,6 +24,7 @@ object DefinedFunctions extends App :
       case i if i > 0 => 1
       case 0 => 0;
       case _ => -1
+
     n * sign(n)
 
   println(s"${abs(-2)}, ${abs(2)}, ${abs(0)}") // 2,2,0
@@ -34,6 +35,7 @@ object DefinedFunctions extends App :
     def _fact(n: Int, acc: Int): Int = n match
       case 0 | 1 => acc
       case _ => _fact(n - 1, n * acc)
+
     _fact(n, 1)
 
   println(factorial2(6)) // 720
