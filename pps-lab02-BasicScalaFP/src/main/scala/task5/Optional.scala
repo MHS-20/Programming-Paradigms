@@ -1,7 +1,7 @@
 package task5
 
 
-object Optionals:
+object Optionals extends App:
   /**
    * Optional is a type that represents a value that may or may not be present.
    * Similar to Optional in Java but using the ADT concept.
@@ -38,7 +38,7 @@ object Optionals:
      * orElse(Empty(), 0) == 0
      *
      * @param optional the optional to get the value from
-     * @param default the default value to return if the optional is Empty
+     * @param default  the default value to return if the optional is Empty
      * @tparam A the type of the optional
      * @tparam B the type of the default value
      * @return the value of the optional if it is Maybe, otherwise the default value
@@ -54,11 +54,25 @@ object Optionals:
      * map(Maybe(1), (x: Int) => x + 1) == Maybe(2)
      * map(Empty(), (x: Int) => x + 1) == Empty()
      *
-     *
      * @param optional the optional to apply the function to
-     * @param f the function to apply to the value of the optional
+     * @param f        the function to apply to the value of the optional
      * @tparam A the type of the optional
      * @tparam B the type of the result of the function
      * @return the result of applying the function to the value of the optional if it is Maybe, otherwise Empty
      */
-    def map[A, B](optional: Optional[A], f: A => B): Optional[B] = ???
+    def map[A, B](optional: Optional[A], f: A => B): Optional[B] = optional match
+      case Maybe(value) => Maybe(f(value))
+      case _ => Empty()
+
+    def filter[A](optional: Optional[A], f: A => Boolean): Optional[A] = optional match
+      case Maybe(value) if f(value) => Maybe(value)
+      case _ => Empty()
+
+  import Optionals.Optional.*
+  println("")
+  println("===== TASK 5 - OPTIONALS ======")
+  println(map(Maybe(5), (x: Int) => x + 1))
+  println(map(Empty(), (x: Int) => x + 1))
+  println(filter(Maybe(5), (x: Int) => x > 3))
+  println(filter(Maybe(5), (x: Int) => x < 3))
+  println(filter(Empty(), (x: Int) => x > 3))
