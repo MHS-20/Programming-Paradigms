@@ -161,8 +161,13 @@ object Sequences: // Essentially, generic linkedlists
         case Cons(h, t) if pred(h) => _part(t, Cons(h, acc1), acc2)(pred)
         case Cons(h, t) => _part(t, acc1, Cons(h, acc2))(pred)
         case _ => (acc1, acc2)
+
       _part(s, Nil(), Nil())(pred)
-    
+
+    def foldLeft[A, B](s: Sequence[A])(acc: B)(operator: (B, A) => B): B = s match
+      case Cons(h, t) => foldLeft(t)(operator(acc, h))(operator)
+      case _ => acc
+
   end Sequence
 end Sequences
 
