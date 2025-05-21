@@ -28,8 +28,7 @@ object ExtensionMethods extends App:
     Sequence.sum(map(filter(seq)(_ > 10))(_ + 1))
   
   // define size and filt as extension methods on a generic Sequence[A]
-  extension [A](s: Sequence[A]) 
-
+  extension [A](s: Sequence[A])
     def size: Int = s match
       case Cons(_, t) => 1 + t.size
       case _ => 0
