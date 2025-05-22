@@ -7,14 +7,26 @@ import Sequence.*
 // Represents a course offered on the platform
 trait Course:
   def courseId: String // Unique identifier (e.g., "CS101", "SCALA01")
+
   def title: String
+
   def instructor: String
+
   def category: String // e.g., "Programming", "Data Science", "Design"
 
 object Course:
   // Factory method for creating Course instances
   def apply(courseId: String, title: String, instructor: String, category: String): Course =
     CourseImpl(courseId, title, instructor, category)
+
+  object sameCategory:
+    def unapply(courses: Sequence[Course]): Option[String] = courses match
+      case Nil() => None
+      case Cons(head, tail) =>
+        def checkAll(s: Sequence[Course], cat: String): Boolean = s match
+          case Nil() => true
+          case Cons(h, t) => h.category == cat && checkAll(t, cat)
+        if checkAll(tail, head.category) then Some(head.category) else None
 
   case class CourseImpl(override val courseId: String,
                         override val title: String,
@@ -193,4 +205,4 @@ object OnlineCoursePlatform:
     platform.removeCourse(pythonCourse)
     println(s"Is PYTHON01 available? ${platform.isCourseAvailable(pythonCourse.courseId)}") // false
     println(s"Programming courses: ${platform.findCoursesByCategory("Programming")}") // Sequence(scalaCourse)
-    
+
