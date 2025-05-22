@@ -10,14 +10,19 @@ class SwingFunctionalFacade {
 
     public static interface Frame {
         Frame setSize(int width, int height);
+
         Frame addButton(String text, String name);
+
         Frame addLabel(String text, String name);
+
         Frame showToLabel(String text, String name);
+
         Frame show();
-        Supplier<String> events();        
+
+        Supplier<String> events();
     }
 
-    public static Frame createFrame(){
+    public static Frame createFrame() {
         return new FrameImpl();
     }
 
@@ -33,12 +38,13 @@ class SwingFunctionalFacade {
         private final Map<String, JLabel> labels = new HashMap<>();
         private final LinkedBlockingQueue<String> eventQueue = new LinkedBlockingQueue<>();
         private final Supplier<String> events = () -> {
-            try{
+            try {
                 return eventQueue.take();
-            } catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 return "";
             }
         };
+
         public FrameImpl() {
             this.jframe.setLayout(new FlowLayout());
         }
@@ -57,7 +63,8 @@ class SwingFunctionalFacade {
             jb.addActionListener(e -> {
                 try {
                     eventQueue.put(name);
-                } catch (InterruptedException ex){}
+                } catch (InterruptedException ex) {
+                }
             });
             this.jframe.getContentPane().add(jb);
             return this;

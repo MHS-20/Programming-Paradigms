@@ -128,14 +128,12 @@ object SchoolModel:
       def hasCourse(name: String): Boolean
 
   object BasicSchoolModule extends SchoolModule:
-    override type School = Sequence[(Teacher, Course)]
-    override type Teacher = String
-    override type Course = String
+      override type School = Sequence[(Teacher, Course)]
+      override type Teacher = String
+      override type Course = String
 
     def teacher(name: String): Teacher = name
-
     def course(name: String): Course = name
-
     def emptySchool: School = Nil()
 
     extension (school: School)
