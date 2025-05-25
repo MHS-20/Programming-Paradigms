@@ -92,3 +92,27 @@ allbigger(cons(H1,T1), cons(H2, T2)) :- H1 > H2, allbigger(T1, T2).
 sublist(L1, cons(H2, nil) :- search(H2, L1).
 sublist(L1, cons(H2,T2) :- search(H2, L1), sublist(L1, T2).
 
+% seq(N,E, List ) --> List is [E,E ,... ,E] with size N
+seq ( zero , _ , nil ).
+seq (s (N) , E , cons (E ,T )) :- seq (N , E , T)
+
+% seqR (N, List ) --> Peano numbers from zero to N
+seqR (zero, cons(zero, nil)).
+seqR (s(N), cons(N,L) :- seqR(N, L)
+
+% last (L, E, Res) aggiunge un elemento alla fine
+last(nil, E, cons(E, nil).
+last(cons(H,T) , E, cons(H,T2) :- last(T, E, T2)
+
+% filter based on a pre-defined predicate
+filter(nil, nil).
+pred(X) :- X > 3.
+filter(cons(H,T), cons(H,FilteredT)) :- pred(H), filter(T, FilteredT).
+filter(cons(H,T), FilteredT) :- \+ pred(H), filter(T, FilteredT).
+
+% map
+map(nil, nil)
+mappping(X, X+5)
+map(cons(H,T), cons(NH, MappedT)) :- mapping(H, NH), map(T, MappedT)
+
+
