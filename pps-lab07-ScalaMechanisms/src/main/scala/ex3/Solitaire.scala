@@ -12,20 +12,28 @@ object Solitaire extends App:
         yield if number > 0 then "%-2d ".format(number) else "X  "
       yield row.mkString
     rows.mkString("\n")
-  //println(render(solution = Seq((0, 0), (2, 1)), width = 3, height = 3))
+  // println(render(solution = Seq((0, 0), (2, 1)), width = 3, height = 3))
 
   def placeMarks(width: Int, height: Int): Unit =
+    println("Placing marks...")
     val total = width * height
     val center = (width / 2, height / 2)
     val directions = List(
-      (2, 0), (-2, 0), (0, 2), (0, -2),
-      (1, 1), (-1, 1), (1, -1), (-1, -1)
+      (2, 0),
+      (-2, 0),
+      (0, 2),
+      (0, -2),
+      (1, 1),
+      (-1, 1),
+      (1, -1),
+      (-1, -1)
     )
 
     def inBounds(x: Int, y: Int): Boolean =
       x >= 0 && x < width && y >= 0 && y < height
 
     def nextMoves(pos: (Int, Int), visited: Set[(Int, Int)]): Seq[(Int, Int)] =
+      println("Visiting...")
       for
         (dx, dy) <- directions
         nx = pos._1 + dx
@@ -36,12 +44,13 @@ object Solitaire extends App:
       yield next
 
     def search(path: Seq[(Int, Int)], visited: Set[(Int, Int)]): Unit =
-      if path.size == total then
-        println(render(path, width, height) + "\n")
+      println("Searching...")
+      if path.size == total then println(render(path, width, height) + "\n")
       else
         for next <- nextMoves(path.last, visited) do
           search(path :+ next, visited + next)
+    search(Seq(center), Set(center))
 
 import Solitaire.*
-@main def runGameStreaming(): Unit =
-  placeMarks(35, 35)
+@main def runGame(): Unit =
+  placeMarks(7,7)
