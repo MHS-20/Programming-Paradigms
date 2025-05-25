@@ -128,43 +128,45 @@ object SchoolModel:
       def hasCourse(name: String): Boolean
 
   object BasicSchoolModule extends SchoolModule:
-      override type School = Sequence[(Teacher, Course)]
-      override type Teacher = String
-      override type Course = String
+    override type School = Sequence[(Teacher, Course)]
+    override type Teacher = String
+    override type Course = String
 
     def teacher(name: String): Teacher = name
+  
     def course(name: String): Course = name
+  
     def emptySchool: School = Nil()
-
+  
     extension (school: School)
       def courses: Sequence[String] =
         def _getAllCourses(school: School): Sequence[String] = school match
           case Cons((_, course), tail) => Cons(course, _getAllCourses(tail))
           case _ => Nil()
-
+  
         _getAllCourses(school)
-
+  
       def teachers: Sequence[String] =
         def _getAllTeachers(school: School): Sequence[String] = school match
           case Cons((teacher, _), tail) => Cons(teacher, _getAllTeachers(tail))
           case _ => Nil()
-
+  
         _getAllTeachers(school)
-
+  
       def setTeacherToCourse(teacher: Teacher, course: Course): School = school match
         case Cons((t, c), tail) => Cons((t, c), tail.setTeacherToCourse(teacher, course))
         case _ => Cons((teacher, course), Nil())
-
+  
       def coursesOfATeacher(teacher: Teacher): Sequence[Course] = school match
         case Cons((t, c), tail) if t == teacher => Cons(c, tail.coursesOfATeacher(teacher))
         case Cons((_, c), tail) => tail.coursesOfATeacher(teacher)
         case _ => Nil()
-
+  
       def hasTeacher(name: String): Boolean = school match
         case Cons((teacher, _), tail) if teacher == name => true
         case Cons(_, tail) => tail.hasTeacher(name)
         case _ => false
-
+  
       def hasCourse(name: String): Boolean = school match
         case Cons((_, course), tail) if course == name => true
         case Cons(_, tail) => tail.hasCourse(name)

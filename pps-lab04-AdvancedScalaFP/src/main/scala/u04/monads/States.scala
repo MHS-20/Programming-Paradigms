@@ -27,4 +27,3 @@ object States:
         State(s => m.apply(s) match
           case (s2, a) => f(a).apply(s2)
         )
-    
