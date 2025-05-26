@@ -67,11 +67,13 @@ dice(6).
 % Generates all possible outcomus of throwing three dices
 three_dice(X, Y, Z):- dice(X), dice(Y), dice(Z).
 
+n_dice([], 0):- !.
+n_dice([X | T], N):- N2 is N-1,
+										dice(X),
+										n_dice(T, N2).
 
 % distinct (List , DistinctList )
 % DistinctList contains all distinct elements from List.
 distinct([], []).
 distinct([H | T], [H | L]) :- distinct(T, L), \+ search(H, L).
 distinct([H | T], L) :- distinct(T, L), search(H, L).
-
-
