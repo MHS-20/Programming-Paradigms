@@ -72,7 +72,7 @@ max (cons (H , T), MT) :- max (T , MT), H =< MT.
 % Min is the smallest element in List
 % Max is the biggest element in List
 % Suppose the list has at least one element
-minmax (cons (H, nil) , H , H) .
+minmax (cons (H, nil) , H , H).
 minmax (cons (H , T), H, MAX) :- minmax (T , MIN, MAX), H < MIN.
 minmax (cons (H , T), MIN, H) :- minmax (T , MIN, MAX), H > MAX.
 minmax (cons (H , T), MIN, MAX) :- minmax (T , MIN, MAX), H >= MIN, H =< MAX.
@@ -90,7 +90,7 @@ allbigger(cons(H1,T1), cons(H2, T2)) :- H1 > H2, allbigger(T1, T2).
 % sublist (List1 , List2 )
 % List1 should contain all elements in List2
 sublist(L1, cons(H2, nil) :- search(H2, L1).
-sublist(L1, cons(H2,T2) :- search(H2, L1), sublist(L1, T2).
+sublist(L1, cons(H2,T2)) :- search(H2, L1), sublist(L1, T2).
 
 % seq(N,E, List ) --> List is [E,E ,... ,E] with size N
 seq ( zero , _ , nil ).
@@ -112,7 +112,7 @@ filter(cons(H,T), FilteredT) :- \+ pred(H), filter(T, FilteredT).
 
 % map
 map(nil, nil)
-mappping(X, X+5)
+mapping(X, X+5)
 map(cons(H,T), cons(NH, MappedT)) :- mapping(H, NH), map(T, MappedT)
 
 
