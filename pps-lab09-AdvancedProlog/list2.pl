@@ -26,13 +26,12 @@ sum([], 0).
 sum([H|T], S) :- sum(T, S2), S is H + S2.
 
 
-% minmax(List, Max, Min)
+% minmax(List, Min, Max)
 % Suppose the list has at least one element
 minmax([ Last ], Last, Last).
 minmax([H | T], H, MAX) :- minmax(T , MIN, MAX), H < MIN.
 minmax([H | T], MIN, H) :- minmax(T , MIN, MAX), H > MAX.
 minmax([H | T], MIN, MAX) :- minmax(T , MIN, MAX), H >= MIN, H =< MAX.
-
 
 % split (List1 , Elements , SubList1 , SubList2 )
 % Splits a list into two sublists based on a given number of elements
@@ -54,4 +53,25 @@ count_occurrences(E, [ E ], 1).
 count_occurrences(E, [ _ ], 0).
 count_occurrences(E, [E | T], C):- count_occurrences(E, T, C2), C is C2 +1.
 count_occurrences(E, [_ | T], C):- count_occurrences(E, T, C).
+
+% dice (X)
+% Generates all possible outcomes of throwing a dice .
+dice(1).
+dice(2).
+dice(3).
+dice(4).
+dice(5).
+dice(6).
+
+% three_dice (L).
+% Generates all possible outcomus of throwing three dices
+three_dice(X, Y, Z):- dice(X), dice(Y), dice(Z).
+
+
+% distinct (List , DistinctList )
+% DistinctList contains all distinct elements from List.
+distinct([], []).
+distinct([H | T], [H | L]) :- distinct(T, L), \+ search(H, L).
+distinct([H | T], L) :- distinct(T, L), search(H, L).
+
 
